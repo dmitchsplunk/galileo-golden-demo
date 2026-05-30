@@ -20,7 +20,7 @@ ui:
   
 # Model configuration (OpenAI family)
 model:
-  default_model: "gpt-4.1"
+  default_model: "gpt-4.1-mini"
   temperature: 0.1
   additional_models:
     - "gpt-4o"

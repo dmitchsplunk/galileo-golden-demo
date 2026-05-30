@@ -69,6 +69,7 @@ def setup_environment(domain_name: Optional[str] = None, domain_config: Optional
         # Base environment variables (always set)
         env_vars = {
             "OPENAI_API_KEY": _resolve("openai_api_key", "OPENAI_API_KEY"),
+            "OPENAI_BASE_URL": _resolve("openai_base_url", "OPENAI_BASE_URL"),
             "GALILEO_API_KEY": _resolve("galileo_api_key", "GALILEO_API_KEY"),
             "GALILEO_STAGE": _resolve("galileo_stage", "GALILEO_STAGE", "protect-prompt-injection-stage"),
             "GALILEO_CONSOLE_URL": _resolve("galileo_console_url", "GALILEO_CONSOLE_URL", "https://app.galileo.ai"),
