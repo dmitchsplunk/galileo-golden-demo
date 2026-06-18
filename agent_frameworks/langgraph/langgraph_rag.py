@@ -7,8 +7,8 @@ import asyncio
 import os
 from typing import Optional
 
-from langchain_classic import hub
 from langchain_openai import OpenAIEmbeddings, ChatOpenAI
+from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langchain_core.tools import tool
 from langchain_classic.chains import create_retrieval_chain
 from langchain_classic.chains.combine_documents import create_stuff_documents_chain
@@ -84,7 +84,17 @@ class DomainRAGSystem:
                 name=f"{self.domain_name.title()} RAG Assistant",
             )
 
-            retrieval_qa_chat_prompt = hub.pull("langchain-ai/retrieval-qa-chat")
+            retrieval_qa_chat_prompt = ChatPromptTemplate.from_messages(
+                [
+                    (
+                        "system",
+                        "Answer any use questions based solely on the context below:\n\n"
+                        "<context>\n{context}\n</context>",
+                    ),
+                    MessagesPlaceholder("chat_history", optional=True),
+                    ("human", "{input}"),
+                ]
+            )
             combine_docs_chain = create_stuff_documents_chain(llm, retrieval_qa_chat_prompt)
             self.retrieval_chain = create_retrieval_chain(retriever, combine_docs_chain)
 
