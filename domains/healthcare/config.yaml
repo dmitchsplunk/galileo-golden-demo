@@ -16,7 +16,7 @@ ui:
 
 # Model configuration
 model:
-  default_model: "gpt-5.2"
+  default_model: "gpt-4.1-mini"
   temperature: 0.1
   additional_models:
     - "gpt-4o"
